@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SuspiciousLookingOwl/shopee.git"
+    "url": "git+https://github.com/SuspiciousLookingOwl/shopee-api.git"
   },
   "keywords": [
     "shopee"
@@ -16,9 +16,9 @@
   "author": "Owl",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SuspiciousLookingOwl/shopee/issues"
+    "url": "https://github.com/SuspiciousLookingOwl/shopee-api/issues"
   },
-  "homepage": "https://github.com/SuspiciousLookingOwl/shopee#readme",
+  "homepage": "https://github.com/SuspiciousLookingOwl/shopee-api#readme",
   "dependencies": {
     "node-fetch": "^2.6.1",
     "snake-camel": "^1.0.6"
