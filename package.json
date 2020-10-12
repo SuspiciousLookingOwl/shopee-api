@@ -1,6 +1,6 @@
 {
   "name": "shopee",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Shopee API wrapper for Node.js",
   "main": "dist/index.js",
   "scripts": {
