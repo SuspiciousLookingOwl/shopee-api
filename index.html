@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <script>
+        async function run() {
+            await fetch("https://cors-anywhere.herokuapp.com/https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=rtx%202080&limit=50&newest=0&order=desc&page_type=search&version=2", {
+                origin: "https://seller.shopee.co.id'",
+                headers: {
+                    "if-none-match-": "*"
+                }
+            });
+            await axios("https://cors-anywhere.herokuapp.com/https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=rtx%202080&limit=50&newest=0&order=desc&page_type=search&version=2", {
+                headers: {
+                    "if-none-match-": "*"
+                }
+            })
+        }
+        
+        run();
+    </script>
+</body>
+</html>
+
