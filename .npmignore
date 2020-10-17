@@ -1,6 +1,7 @@
 .github
 tests
 src
+example
 
 .eslintignore
 .eslintrc.js
