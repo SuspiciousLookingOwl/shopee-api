@@ -4,7 +4,10 @@
   "description": "Shopee API wrapper for Node.js",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "tsc && jest",
+    "compile": "tsc",
+    "dev": "tsc --watch",
+    "dev:test": "jest --watch"
   },
   "repository": {
     "type": "git",
