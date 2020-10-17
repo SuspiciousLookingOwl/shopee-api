@@ -14,7 +14,7 @@ npm i shopee
 ## Example
 ```js
 
-const Shopee = require("shopee-api");
+const Shopee = require("shopee");
 
 const shopee = new Shopee(Shopee.BASE_URL.INDONESIA);
 
