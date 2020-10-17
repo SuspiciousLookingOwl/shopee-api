@@ -13,122 +13,79 @@ npm i shopee
 
 ## Example
 ```js
-const shopee = require("shopee");
+
+const Shopee = require("shopee-api");
+
+const shopee = new Shopee(Shopee.BASE_URL.INDONESIA);
 
 async function run() {
-    const response = await shopee.search({
+    const product = await shopee.search({
         query: "RTX 2080",
-        orderBy: shopee.ORDER_BY.PRICE,
-        orderType: shopee.ORDER_TYPE.ASC,
+        orderBy: Shopee.SEARCH.ORDER_BY.PRICE,
+        orderType: Shopee.SEARCH.ORDER_TYPE.ASC,
         shippings: [
-            shopee.SHIPPING.JNE_REGULAR,
-            shopee.SHIPPING.SI_CEPAT_REG
+            Shopee.SEARCH.SHIPPING.JNE_REGULAR,
+            Shopee.SEARCH.SHIPPING.SI_CEPAT_REG
         ],
         locations: ["Jawa Barat", "Jabodetabek"],
         priceMax: 30000000
     });
-    console.log(response[0]);
+    console.log(product[0].name);
 }
 
 run();
 ```
-Output example:
-```js
-{
-  itemid: 7938832916,
-  welcomePackageInfo: null,
-  liked: false,
-  recommendationInfo: null,
-  bundleDealInfo: null,
-  priceMaxBeforeDiscount: -1,
-  trackingInfo: {
-    multiSearchTracking: [ 0 ],
-    viralSpuTracking: null,
-    businessTracking: null
-  },
-  image: 'e6bed1bfed0133eb5823fbc3042bf828',     
-  recommendationAlgorithm: null,
-  isCcInstallmentPaymentEligible: false,
-  shopid: 238466450,
-  canUseWholesale: false,
-  groupBuyInfo: null,
-  referenceItemId: '',
-  currency: 'IDR',
-  rawDiscount: 0,
-  showFreeShipping: false,
-  videoInfoList: [],
-  adsKeyword: null,
-  collectionId: null,
-  images: [ 'e6bed1bfed0133eb5823fbc3042bf828' ],
-  isPreferredPlusSeller: false,
-  priceBeforeDiscount: 0,
-  isCategoryFailed: false,
-  showDiscount: 0,
-  cmtCount: 0,
-  viewCount: 9,
-  displayName: null,
-  catid: 134,
-  jsonData: null,
-  upcomingFlashSale: null,
-  isOfficialShop: false,
-  brand: 'MSI',
-  priceMin: 2562000000000,
-  likedCount: 1,
-  canUseBundleDeal: false,
-  showOfficialShopLabel: false,
-  coinEarnLabel: null,
-  priceMinBeforeDiscount: -1,
-  cbOption: 0,
-  sold: 0,
-  deductionInfo: null,
-  stock: 5,
-  status: 1,
-  priceMax: 2562000000000,
-  addOnDealInfo: null,
-  isGroupBuyItem: null,
-  flashSale: null,
-  price: 2562000000000,
-  shopLocation: 'KOTA BANDUNG',
-  itemRating: {
-    ratingStar: 0,
-    ratingCount: [ 0, 0, 0, 0, 0, 0 ],
-    rcountWithImage: 0,
-    rcountWithContext: 0
-  },
-  showOfficialShopLabelInTitle: false,
-  tierVariations: [],
-  isAdult: false,
-  discount: null,
-  flag: 0,
-  isNonCcInstallmentPaymentEligible: false,      
-  hasLowestPriceGuarantee: false,
-  hasGroupBuyStock: null,
-  matchType: null,
-  previewInfo: null,
-  welcomePackageType: 0,
-  exclusivePriceInfo: null,
-  name: 'MSI RTX 2080 Ti Gaming X Trio',
-  distance: null,
-  adsid: null,
-  ctime: 1592632842,
-  wholesaleTierList: [],
-  showShopeeVerifiedLabel: false,
-  campaignid: null,
-  showOfficialShopLabelInNormalPosition: null,
-  itemStatus: 'normal',
-  shopeeVerified: false,
-  hiddenPriceDisplay: null,
-  sizeChart: null,
-  itemType: 0,
-  shippingIconType: null,
-  campaignStock: null,
-  labelIds: [ 1000031 ],
-  serviceByShopeeFlag: 0,
-  badgeIconType: 0,
-  historicalSold: 0,
-  transparentBackgroundImage: ''
-}
+
+[Check out product output example](example/product.js)
+
+## API
+
+#### `new Shopee(baseUrl, apiVersion = "v2")`
+
+Creates new Shopee instance.
+
+`baseUrl` is Shopee url based on the region, `baseUrl` value can be:
 ```
+SINGAPORE: "https://shopee.sg"
+MALAYSIA: "https://shopee.my"
+THAILAND: "https://shopee.co.th"
+TAIWAN: "https://shopee.tw",
+INDONESIA: "https://shopee.co.id"
+VIETNAM: "https://shopee.com.vn"
+PHILIPPINES: "https://shopee.ph"
+BRAZIL: "http://shopee.com.br"
+```
+You can access `baseUrl` enum from `Shopee.BASE_URL`, for example:
+```js
+const Shopee = require("shopee-api");
+
+const indonesianShopee = new Shopee(Shopee.BASE_URL.INDONESIA);
+const singaporeanShopee = new Shopee(Shopee.BASE_URL.SINGAPORE);
+const malaysianShopee = new Shopee(Shopee.BASE_URL.MALAYSIA);
+
+```
+
+
+#### `.search(parameters)`
+
+Searches for products, it's async so it returns a `Promise` of products.
+
+`parameters` is an object that can have following keys:
+
+| Key | Description | Value |
+|-|-|-|
+| `verified` | Whether the store should be verified or not | integer (`1` \| `0`) |
+| `mall` | Whether the store should be mall or not | integer (`1` \| `0`) |
+| `orderBy` | How the search result will be ordered by | string (`"relevancy"` \| `"ctime"` \| `"sales"` \| `"price"` |
+| `orderType` | How the search result will be ordered | string (`"desc"` \| `"asc"`) |
+| `query` | Search keyword | string |
+| `priceMin` | Minimum price of the search result | integer |
+| `priceMax` | Maximum price of the search result | integer |
+| `limit` | How many products to search | integer |
+| `page` | Page duh | integer |
+| `rating` | Minimum rating of the products, <br>for example if you pass `3` then it will show products with rating >= 3 | integer (`1-5`) |
+| `shippings` | ID's of allowed shipping couriers. It's usually in order based on the shipping options on the search page starting from `1`.<br>So if you go to [shopee.my](https://shopee.com.my/search?keyword=test), you can look at the shipping options at the left of the page,<br>if you want to allow only J&T and DHL, pass `[2,4]` | integer[] |
+| `locations` | Location name, it usually matches the location filter on the search page, e.g. `["Johor", "Penang"]` | string[] |
 
 ---
 ### Todo
