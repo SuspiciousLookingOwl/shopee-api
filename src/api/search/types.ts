@@ -11,7 +11,7 @@ export interface SearchParameters extends Record<string, string | string[] | num
     limit: number;
     page: number;
     rating: number;
-    shippings: typeof SHIPPING[keyof typeof SHIPPING][];
+    shippings: number[];
     locations: string[];
     pageType: "search"
 }

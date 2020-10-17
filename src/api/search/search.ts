@@ -3,9 +3,10 @@ import fetch from "node-fetch";
 import * as c from "./constants";
 import { parameterToSearchQuery } from "./helper";
 import { toCamel } from "snake-camel";
+import Shopee from "../../Shopee";
 
 
-export const search = async (parameters: Partial<SearchParameters> = {}): Promise<Product[]> => {
+export async function search(this: Shopee, parameters: Partial<SearchParameters> = {}): Promise<Product[]> {
 	parameters = {
 		version: 2,
 		newest: 0,
@@ -24,9 +25,9 @@ export const search = async (parameters: Partial<SearchParameters> = {}): Promis
 		...parameters
 	};
 	
-	const response = await fetch(`${c.ENDPOINT}?${await parameterToSearchQuery(parameters)}`, {
+	const response = await fetch(`${this.API_URL}${c.ENDPOINT}?${await parameterToSearchQuery(parameters)}`, {
 		headers: { "if-none-match-": "*" }
 	});
 
 	return (await response.json()).items.map(toCamel);
-};
+}

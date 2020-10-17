@@ -1,4 +1,4 @@
-export const ENDPOINT = "https://shopee.co.id/api/v2/search_items/";
+export const ENDPOINT = "search_items/";
 
 export  const NORMALIZED_SEARCH_PARAMETER_KEY = {
 	verified: "shopee_verified",
@@ -29,6 +29,7 @@ export const ORDER_TYPE = {
 	ASC: "asc"
 };
 
+// Currently for Indonesian only
 export const SHIPPING = {
 	SHOPEE_SAME_DAY: 1,
 	SHOPEE_STANDARD: 2,

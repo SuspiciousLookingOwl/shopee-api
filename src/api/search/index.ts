@@ -1,7 +1,2 @@
-import { search } from "./search";
-import * as constants from "./constants";
-
-export = {
-	search,
-	...constants
-}
+export { search } from "./search";
+export * as constants from "./constants";

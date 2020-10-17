@@ -1,5 +1,3 @@
-import search from "./api/search";
+import Shopee from "./Shopee";
 
-export = {
-	...search
-};
+export = Shopee;
