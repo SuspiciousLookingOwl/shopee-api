@@ -36,7 +36,7 @@ async function run() {
 run();
 ```
 
-[Check out product output example](example/product.js)
+[Check out product output example](example/product.json)
 
 ## API
 
