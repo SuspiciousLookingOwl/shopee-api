@@ -1,10 +1,11 @@
 import { ORDER_BY, ORDER_TYPE, SHIPPING } from "./constants";
 
-export interface SearchParameters extends Record<string, string | string[] | number | number[] | boolean> {
+export interface SearchParameters
+    extends Record<string, string | string[] | number | number[] | boolean> {
     verified: 1 | 0;
     mall: 1 | 0;
     orderType: typeof ORDER_TYPE[keyof typeof ORDER_TYPE];
-    orderBy: typeof ORDER_BY[keyof typeof ORDER_BY]
+    orderBy: typeof ORDER_BY[keyof typeof ORDER_BY];
     query: string;
     priceMin: number;
     priceMax: number;
@@ -13,7 +14,7 @@ export interface SearchParameters extends Record<string, string | string[] | num
     rating: number;
     shippings: number[];
     locations: string[];
-    pageType: "search"
+    pageType: "search";
 }
 
 // TODO: Need more info for `any` type
@@ -22,12 +23,17 @@ export interface Product {
     welcomePackageInfo?: any;
     liked: boolean;
     recommendationInfo?: any;
-    bundleDealInfo?: any;
+    bundleDealInfo?: {
+        bundleDealId: number;
+        bundleDealLabel: string;
+    };
     priceMaxBeforeDiscount: number;
     trackingInfo: {
-        multiSearchTracking: number[];
-        viralSpuTracking?: any;
-        businessTracking?: any;
+        multiSearchTracking?: number[];
+        viralSpuTracking: any;
+        businessTracking: any;
+        ruleid?: number[];
+        groupid: number;
     };
     image: string;
     recommendationAlgorithm?: any;
@@ -39,8 +45,15 @@ export interface Product {
     currency: string;
     rawDiscount: number;
     showFreeShipping: boolean;
-    videoInfoList: any[];
-    adsKeyword?: any;
+    videoInfoList: {
+        videoId: string;
+        version: number;
+        formats: any[];
+        duration: number;
+        defaultFormat: any;
+        thumbUrl: string;
+    }[];
+    adsKeyword?: string;
     collectionId?: any;
     images: string[];
     isPreferredPlusSeller: boolean;
@@ -51,7 +64,7 @@ export interface Product {
     viewCount: number;
     displayName?: any;
     catid: number;
-    jsonData?: any;
+    jsonData?: string;
     upcomingFlashSale?: any;
     isOfficialShop: boolean;
     brand: string;
@@ -63,11 +76,15 @@ export interface Product {
     priceMinBeforeDiscount: number;
     cbOption: number;
     sold: number;
-    deductionInfo?: any;
+    deductionInfo?: string;
     stock: number;
     status: number;
     priceMax: number;
-    addOnDealInfo?: any;
+    addOnDealInfo?: {
+        addOnDealId: number;
+        addOnDealLabel: string;
+        subType: number;
+    };
     isGroupBuyItem?: any;
     flashSale?: any;
     price: number;
@@ -79,24 +96,34 @@ export interface Product {
         rcountWithContext: number;
     };
     showOfficialShopLabelInTitle: boolean;
-    tierVariations: any[];
+    tierVariations: {
+        images: string[];
+        properties: any[];
+        type?: number;
+        name: string;
+        options: string[];
+    }[];
     isAdult: boolean;
-    discount?: any;
+    discount?: string; // string of number, fyi.
     flag: number;
     isNonCcInstallmentPaymentEligible: boolean;
     hasLowestPriceGuarantee: boolean;
     hasGroupBuyStock?: any;
-    matchType?: any;
+    matchType?: number;
     previewInfo?: any;
     welcomePackageType: number;
     exclusivePriceInfo?: any;
     name: string;
     distance?: any;
-    adsid?: any;
+    adsid?: number;
     ctime: number;
-    wholesaleTierList: any[];
+    wholesaleTierList: {
+        minCount: number;
+        price: number;
+        maxCount?: number;
+    }[];
     showShopeeVerifiedLabel: boolean;
-    campaignid?: any;
+    campaignid?: number;
     showOfficialShopLabelInNormalPosition?: any;
     itemStatus: string;
     shopeeVerified: boolean;
